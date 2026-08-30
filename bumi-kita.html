@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bumi Kita — Panduan Santai Menjaga Lingkungan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3EEDD;
+    --paper-card:#FBF8EE;
+    --ink:#20301C;
+    --ink-soft:#4B5A45;
+    --forest:#2F4F30;
+    --forest-deep:#16260F;
+    --forest-mid:#3D6140;
+    --clay:#C9812E;
+    --river:#2C7C86;
+    --line: rgba(22,38,15,0.14);
+    --line-soft: rgba(22,38,15,0.08);
+    --shadow: 0 18px 40px -22px rgba(22,38,15,0.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'DM Serif Display',serif;
+    font-weight:400;
+    line-height:1.08;
+    margin:0;
+    color:var(--forest-deep);
+  }
+  p{margin:0;}
+  a{color:inherit;}
+  .accent{ font-style:italic; color:var(--clay); }
+  ::selection{ background:var(--clay); color:#fff; }
+
+  .wrap{ max-width:1240px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(243,238,221,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1240px; margin:0 auto; padding:16px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:'DM Serif Display',serif; font-size:22px;
+    text-decoration:none; color:var(--forest-deep); letter-spacing:0.2px;
+  }
+  .nav-links{ display:flex; gap:28px; list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    text-decoration:none; font-size:14.5px; font-weight:600;
+    color:var(--ink-soft); padding:6px 2px; border-bottom:2px solid transparent;
+    transition:.2s;
+  }
+  .nav-links a:hover, .nav-links a.active{ color:var(--forest-deep); border-color:var(--clay); }
+  .nav-toggle{ display:none; }
+
+  /* ---------- PAGE TOGGLE ---------- */
+  .page{ display:none; }
+  .page.active{ display:block; animation: fadeIn .35s ease; }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:translateY(0); } }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{ padding:96px 0; position:relative; }
+  .kicker{
+    display:inline-block; font-size:13px; font-weight:800; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--river); margin-bottom:16px;
+  }
+  .kicker.gold{ color:var(--clay); }
+  .lede{ font-size:18px; line-height:1.65; color:var(--ink-soft); max-width:560px; }
+  .two-col{
+    display:grid; grid-template-columns: 1.05fr 0.95fr; gap:64px; align-items:center;
+  }
+  .two-col.reverse{ grid-template-columns: 0.95fr 1.05fr; }
+  .two-col.reverse .side{ order:2; }
+  .side svg{ width:100%; height:auto; display:block; }
+  .side-frame{
+    background:var(--paper-card); border:1px solid var(--line);
+    border-radius:28px; padding:28px; box-shadow:var(--shadow);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background: radial-gradient(120% 140% at 14% 0%, #21391f 0%, var(--forest-deep) 55%, #101f0c 100%);
+    color:#F3EEDD; padding:88px 0 0 0; overflow:hidden;
+  }
+  .hero .wrap{ padding-bottom:0; }
+  .hero-grid{ display:grid; grid-template-columns:1.08fr 0.92fr; gap:40px; align-items:center; }
+  .hero .kicker{ color:#C9E3B8; }
+  .hero h1{ color:#FBF8EE; font-size:56px; line-height:1.08; letter-spacing:-.5px; }
+  .hero h1 .accent{ color:#E7A94E; }
+  .hero-sub{ margin-top:22px; font-size:17.5px; line-height:1.7; color:#CFE0C4; max-width:480px; }
+  .callout{
+    margin-top:32px; background:rgba(251,248,238,0.08);
+    border:1px solid rgba(251,248,238,0.18); border-radius:18px;
+    padding:20px 22px; max-width:480px; backdrop-filter:blur(4px);
+  }
+  .callout-label{
+    display:block; font-size:12px; font-weight:800; letter-spacing:.1em;
+    text-transform:uppercase; color:#E7A94E; margin-bottom:8px;
+  }
+  .callout p{ font-size:15px; line-height:1.6; color:#E7EBDB; }
+  .hero-illustration{ position:relative; }
+  .hero-nav-cta{
+    margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px; border-radius:100px; font-weight:700; font-size:14.5px;
+    text-decoration:none; border:1px solid transparent; cursor:pointer;
+    transition:.2s;
+  }
+  .btn-primary{ background:#E7A94E; color:#20300F; }
+  .btn-primary:hover{ background:#f0bb6a; }
+  .btn-ghost{ border-color:rgba(251,248,238,0.35); color:#F3EEDD; }
+  .btn-ghost:hover{ border-color:#F3EEDD; }
+  .horizon-strip{ margin-top:70px; }
+  .horizon-strip svg{ display:block; width:100%; height:auto; }
+
+  /* ---------- DATA STRIP (below hero horizon) ---------- */
+  .stat-strip{ background:var(--forest-deep); }
+  .stat-strip .wrap{ padding-top:0; padding-bottom:44px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .stat-box{ border-top:1px solid rgba(251,248,238,0.18); padding-top:18px; }
+  .stat-box .num{ font-family:'DM Serif Display',serif; font-size:34px; color:#F3EEDD; }
+  .stat-box .lbl{ font-size:13.5px; color:#B9CBAC; margin-top:4px; }
+
+  /* ---------- DATA SECTION ---------- */
+  #data{ background:var(--paper); }
+  .chart{ margin-top:44px; display:flex; flex-direction:column; gap:26px; }
+  .chart-row{ }
+  .chart-label{ display:flex; justify-content:space-between; font-weight:700; font-size:15.5px; margin-bottom:8px; }
+  .chart-value{ color:var(--clay); font-family:'DM Serif Display',serif; font-size:19px; }
+  .chart-track{ height:14px; background:var(--line-soft); border-radius:100px; overflow:hidden; }
+  .chart-bar{ height:100%; border-radius:100px; background:linear-gradient(90deg,var(--forest-mid),var(--river)); }
+  .chart-note{ margin-top:8px; font-size:14px; color:var(--ink-soft); line-height:1.55; max-width:520px; }
+  .chart-source{ margin-top:30px; font-size:12.5px; color:var(--ink-soft); opacity:.8; line-height:1.6; }
+
+  .decay-card{ }
+  .decay-list{ list-style:none; margin:24px 0 0 0; padding:0; display:flex; flex-direction:column; }
+  .decay-list li{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 0; border-bottom:1px solid var(--line);
+    font-size:15px;
+  }
+  .decay-list li:first-child{ padding-top:0; }
+  .decay-item{ font-weight:700; }
+  .decay-time{ color:var(--river); font-weight:700; font-size:13.5px; text-align:right; }
+
+  /* ---------- PRINSIP ---------- */
+  #prinsip{ background:var(--paper-card); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .principles-grid{ margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .principle{
+    background:var(--paper); border:1px solid var(--line); border-radius:22px;
+    padding:28px; display:flex; gap:18px; align-items:flex-start;
+    transition:.25s;
+  }
+  .principle:hover{ transform:translateY(-3px); box-shadow:var(--shadow); }
+  .p-icon{
+    flex:none; width:52px; height:52px; border-radius:14px;
+    background:var(--forest); display:flex; align-items:center; justify-content:center;
+  }
+  .p-icon svg{ width:26px; height:26px; }
+  .p-stroke{ fill:none; stroke:#F3EEDD; stroke-width:3.4; stroke-linecap:round; stroke-linejoin:round; }
+  .p-text h3{ font-size:19px; margin-bottom:8px; }
+  .p-text p{ font-size:14.5px; color:var(--ink-soft); line-height:1.6; }
+
+  .myths{ margin-top:80px; }
+  .section-kicker{ font-size:13px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--clay); margin-bottom:10px; }
+  .section-lede{ font-size:16px; color:var(--ink-soft); max-width:620px; margin-top:10px; line-height:1.6; }
+  .faq-list{ margin-top:30px; display:flex; flex-direction:column; gap:12px; max-width:760px; }
+  .faq-item{
+    background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:18px 22px;
+  }
+  .faq-item summary{ cursor:pointer; font-weight:700; font-size:15.5px; list-style:none; display:flex; justify-content:space-between; gap:16px; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{ content:'+'; font-family:'DM Serif Display',serif; font-size:22px; color:var(--clay); flex:none; }
+  .faq-item[open] summary::after{ content:'–'; }
+  .faq-item p{ margin-top:12px; font-size:14.5px; color:var(--ink-soft); line-height:1.6; }
+
+  /* ---------- KOMUNITAS ---------- */
+  #komunitas{ background:var(--paper); }
+  .feature-grid{ margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  .feature{
+    background:var(--paper-card); border:1px solid var(--line); border-radius:26px;
+    padding:32px; box-shadow:var(--shadow);
+  }
+  .feature-media{ width:64px; height:64px; border-radius:16px; background:var(--river); display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
+  .feature-media svg{ width:34px; height:34px; }
+  .f-stroke{ fill:none; stroke:#F3EEDD; stroke-width:3.2; stroke-linecap:round; }
+  .f-ring{ fill:none; stroke:rgba(243,238,221,0.35); stroke-width:2; }
+  .feature-tag{ font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--river); }
+  .feature h3{ font-size:24px; margin-top:8px; }
+  .feature p{ font-size:14.5px; color:var(--ink-soft); line-height:1.65; margin-top:12px; }
+  .feature-cta{
+    margin-top:16px; padding-top:16px; border-top:1px dashed var(--line);
+    font-size:14px; color:var(--forest-deep);
+  }
+  .tip-box{
+    margin-top:26px; background:var(--forest-deep); color:#F3EEDD; border-radius:22px;
+    padding:28px 32px; display:flex; gap:24px; align-items:center; flex-wrap:wrap; justify-content:space-between;
+  }
+  .tip-box h3{ color:#F3EEDD; font-size:20px; }
+  .tip-box p{ color:#CFE0C4; font-size:14.5px; margin-top:6px; max-width:520px; }
+
+  /* ---------- BANK SAMPAH ---------- */
+  #banksampah{ background:var(--paper-card); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .steps-row{ margin-top:44px; display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .step-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:20px; padding:22px;
+    position:relative;
+  }
+  .step-num{
+    font-family:'DM Serif Display',serif; font-size:15px; color:#fff;
+    width:30px; height:30px; border-radius:50%; background:var(--clay);
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+  }
+  .step-card h3{ font-size:16.5px; margin-bottom:6px; }
+  .step-card p{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; }
+
+  .stat-line{
+    margin-top:36px; display:flex; gap:34px; flex-wrap:wrap;
+    background:var(--forest); color:#F3EEDD; border-radius:20px; padding:24px 30px;
+  }
+  .stat-line .item{ min-width:150px; }
+  .stat-line .num{ font-family:'DM Serif Display',serif; font-size:26px; }
+  .stat-line .lbl{ font-size:12.5px; color:#CFE0C4; margin-top:2px; }
+  .stat-line .note{ font-size:12.5px; color:#CFE0C4; max-width:280px; align-self:center; line-height:1.5; }
+
+  .calc{
+    margin-top:70px; background:var(--paper); border:1px solid var(--line);
+    border-radius:28px; padding:40px; box-shadow:var(--shadow);
+    display:grid; grid-template-columns: 1fr 1fr; gap:44px;
+  }
+  .calc-head h2{ font-size:30px; }
+  .calc-head .lede{ margin-top:10px; }
+  .disclaimer{
+    margin-top:18px; font-size:12.5px; color:var(--ink-soft); background:var(--line-soft);
+    border-radius:12px; padding:12px 14px; line-height:1.55;
+  }
+  .chip-row{ margin-top:26px; display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    border:1.5px solid var(--line); background:var(--paper-card); border-radius:100px;
+    padding:10px 16px; font-size:13.5px; font-weight:700; cursor:pointer; color:var(--ink);
+    transition:.15s; display:flex; align-items:center; gap:8px;
+  }
+  .chip .dot{ width:9px; height:9px; border-radius:50%; }
+  .chip:hover{ border-color:var(--forest-mid); }
+  .chip.active{ background:var(--forest); border-color:var(--forest); color:#fff; }
+  .weight-row{ margin-top:22px; display:flex; align-items:center; gap:16px; }
+  .weight-row input[type="range"]{ flex:1; accent-color:var(--forest); }
+  .weight-val{ font-family:'DM Serif Display',serif; font-size:22px; min-width:78px; text-align:right; }
+  .calc-actions{ margin-top:24px; display:flex; gap:12px; }
+  .btn-forest{ background:var(--forest); color:#fff; border:none; }
+  .btn-forest:hover{ background:var(--forest-mid); }
+  .btn-outline{ border:1.5px solid var(--line); background:transparent; color:var(--ink); }
+  .btn-outline:hover{ border-color:var(--forest); }
+
+  .tabungan-card{
+    background:var(--forest-deep); border-radius:22px; padding:28px; color:#F3EEDD;
+    display:flex; flex-direction:column;
+  }
+  .saldo-label{ font-size:12.5px; text-transform:uppercase; letter-spacing:.1em; color:#B9CBAC; font-weight:700; }
+  .saldo-num{ font-family:'DM Serif Display',serif; font-size:40px; margin-top:8px; color:#E7A94E; }
+  .saldo-sub{ font-size:13px; color:#CFE0C4; margin-top:4px; }
+  .entry-list{ margin-top:22px; display:flex; flex-direction:column; gap:0; max-height:230px; overflow-y:auto; padding-right:4px; }
+  .entry-list::-webkit-scrollbar{ width:5px; }
+  .entry-list::-webkit-scrollbar-thumb{ background:rgba(243,238,221,0.3); border-radius:10px; }
+  .entry-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:11px 0; border-bottom:1px solid rgba(243,238,221,0.14); font-size:13.5px;
+  }
+  .entry-row .name{ font-weight:700; }
+  .entry-row .meta{ color:#B9CBAC; font-size:12px; }
+  .entry-row .amt{ color:#E7A94E; font-weight:700; }
+  .entry-empty{ font-size:13.5px; color:#9FB393; padding:14px 0; text-align:center; }
+  .fun-fact{ margin-top:20px; font-size:12.5px; color:#CFE0C4; background:rgba(251,248,238,0.08); border-radius:12px; padding:12px 14px; line-height:1.55; }
+
+  /* ---------- AKSI ---------- */
+  #aksi{ background:var(--paper); }
+  .checklist{ margin:44px 0 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; }
+  .checklist li label{
+    display:flex; align-items:center; gap:16px; background:var(--paper-card);
+    border:1px solid var(--line); border-radius:16px; padding:18px 20px; cursor:pointer;
+    transition:.2s; font-size:15px; font-weight:600;
+  }
+  .checklist li label:hover{ border-color:var(--forest-mid); }
+  .checklist input[type="checkbox"]{
+    appearance:none; width:22px; height:22px; border-radius:7px; border:2px solid var(--line);
+    flex:none; position:relative; cursor:pointer;
+  }
+  .checklist input[type="checkbox"]:checked{ background:var(--forest); border-color:var(--forest); }
+  .checklist input[type="checkbox"]:checked::after{
+    content:''; position:absolute; left:6px; top:2px; width:6px; height:11px;
+    border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg);
+  }
+  .checklist li:has(input:checked) label{ opacity:.6; }
+  .checklist li:has(input:checked) span{ text-decoration:line-through; }
+  .checklist-counter{ margin-top:22px; font-size:14.5px; font-weight:700; color:var(--river); }
+  .reflection{ margin-top:56px; max-width:600px; }
+  .reflection h2{ font-size:26px; margin-bottom:12px; }
+  .reflection p{ font-size:15px; color:var(--ink-soft); line-height:1.65; }
+
+  /* ---------- FOOTER ---------- */
+  .footer{ background:var(--forest-deep); color:#CFE0C4; padding:46px 0; }
+  .footer .wrap{ padding-top:0; padding-bottom:0; }
+  .footer p{ font-size:12.5px; line-height:1.7; }
+  .footer-note{ margin-top:10px; color:#9FB393; font-style:italic; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .nav-links{ display:none; }
+    .hero h1{ font-size:40px; }
+    .two-col, .two-col.reverse{ grid-template-columns:1fr; gap:36px; }
+    .two-col.reverse .side{ order:0; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .stat-strip .wrap{ grid-template-columns:1fr; gap:14px; }
+    .principles-grid{ grid-template-columns:1fr; }
+    .feature-grid{ grid-template-columns:1fr; }
+    .steps-row{ grid-template-columns:1fr 1fr; }
+    .calc{ grid-template-columns:1fr; padding:26px; }
+    section{ padding:64px 0; }
+    .wrap{ padding:0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#beranda" class="brand">Bumi&nbsp;Kita</a>
+    <ul class="nav-links">
+      <li><a href="#beranda">Beranda</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#prinsip">Prinsip</a></li>
+      <li><a href="#komunitas">Komunitas</a></li>
+      <li><a href="#banksampah">Bank Sampah</a></li>
+      <li><a href="#aksi">Aksi</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ==================== HERO / BERANDA ==================== -->
+<div class="page active" data-page="beranda">
+<section class="hero" id="beranda">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="kicker">Panduan santai &middot; bukan ceramah</p>
+        <h1>Bumi nggak butuh<br>pahlawan.<br><span class="accent">Cukup kebiasaan</span> yang diulang.</h1>
+        <p class="hero-sub">Menjaga lingkungan itu bukan proyek besar sekali jadi. Ini kumpulan kebiasaan kecil yang, kalau terus diulang, jadi siklus yang beneran muter.</p>
+
+        <div class="callout">
+          <span class="callout-label">Tahukah kamu?</span>
+          <p>Indonesia ada di posisi ke-5 dunia sebagai penghasil sampah terbesar &mdash; sekitar 65 juta ton dalam setahun, menurut laporan Bank Dunia. Sebagian besar di antaranya sebenarnya bisa dikurangi dari rumah.</p>
+        </div>
+
+        <div class="hero-nav-cta">
+          <a href="#banksampah" class="btn btn-primary">Coba kalkulator Bank Sampah</a>
+          <a href="#aksi" class="btn btn-ghost">Lihat checklist harian</a>
+        </div>
+      </div>
+
+      <div class="hero-illustration" aria-hidden="true">
+        <svg viewBox="0 0 460 420" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="330" cy="90" r="52" fill="#E7A94E" opacity="0.9"/>
+          <circle cx="330" cy="90" r="72" fill="none" stroke="#E7A94E" stroke-opacity="0.35" stroke-width="1.5"/>
+          <path d="M0 260 C 70 210, 150 240, 220 200 C 300 155, 380 210, 460 175 L 460 420 L 0 420 Z" fill="#2F4F30" opacity="0.9"/>
+          <path d="M0 300 C 90 260, 180 300, 260 265 C 340 230, 400 280, 460 250 L 460 420 L 0 420 Z" fill="#3D6140"/>
+          <path d="M0 340 Q 30 330 60 340 T 120 340 T 180 340 T 240 340 T 300 340 T 360 340 T 420 340 T 460 340" stroke="#2C7C86" stroke-width="3" fill="none" opacity="0.6"/>
+          <!-- bird strokes -->
+          <path d="M120 120 Q 130 110 140 120 Q 150 110 160 120" stroke="#F3EEDD" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.7"/>
+          <path d="M60 150 Q 70 140 80 150 Q 90 140 100 150" stroke="#F3EEDD" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.5"/>
+          <!-- tree -->
+          <path d="M70 300 L70 380" stroke="#1B2A18" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="70" cy="270" r="34" fill="#E7A94E" opacity="0.85"/>
+          <circle cx="45" cy="290" r="24" fill="#3D6140"/>
+          <circle cx="95" cy="290" r="24" fill="#3D6140"/>
+          <path d="M370 320 L370 385" stroke="#1B2A18" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="370" cy="300" r="26" fill="#3D6140"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="horizon-strip" aria-hidden="true">
+      <svg viewBox="0 0 1200 140" preserveAspectRatio="none">
+        <path d="M0 90 C 150 40, 300 70, 460 40 C 620 10, 780 60, 940 40 C 1040 28, 1120 55, 1200 42 L 1200 140 L 0 140 Z" fill="#F3EEDD"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="wrap">
+    <div class="stat-box">
+      <div class="num">65 juta ton</div>
+      <div class="lbl">Sampah nasional per tahun &mdash; Indonesia #5 dunia (Bank Dunia)</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">50,8%</div>
+      <div class="lbl">Berasal langsung dari sampah rumah tangga</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">11.556 unit</div>
+      <div class="lbl">Bank sampah aktif di 363 kabupaten/kota (KLHK, 2021)</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== DATA ==================== -->
+<section class="page" id="data" data-page="data">
+  <div class="wrap">
+    <p class="kicker">Bukan asumsi &mdash; ini datanya</p>
+    <h2 style="font-size:36px; max-width:640px;">Sampah Indonesia dalam angka</h2>
+    <p class="lede" style="margin-top:14px;">Beberapa angka terbaru soal ke mana sebenarnya sampah kita berakhir, biar diskusinya nggak cuma modal perasaan.</p>
+
+    <div class="two-col" style="margin-top:20px; align-items:start;">
+      <div>
+        <div class="chart">
+          <div class="chart-row">
+            <div class="chart-label"><span>Sampah rumah tangga</span><span class="chart-value">50,8%</span></div>
+            <div class="chart-track"><div class="chart-bar" style="width:50.8%"></div></div>
+            <p class="chart-note">Lebih dari separuh total timbulan sampah nasional 2024 berasal langsung dari rumah kita masing-masing.</p>
+          </div>
+          <div class="chart-row">
+            <div class="chart-label"><span>Sisa makanan</span><span class="chart-value">&plusmn;40%</span></div>
+            <div class="chart-track"><div class="chart-bar" style="width:40%"></div></div>
+            <p class="chart-note">Porsi terbesar dari apa yang berakhir di tempat pembuangan akhir &mdash; angka ini nyaris nggak berubah sejak 2019.</p>
+          </div>
+          <div class="chart-row">
+            <div class="chart-label"><span>Sampah plastik</span><span class="chart-value">19,65%</span></div>
+            <div class="chart-track"><div class="chart-bar" style="width:19.65%"></div></div>
+            <p class="chart-note">Naik dari sekitar 15,9% di 2019 &mdash; satu-satunya kategori besar yang porsinya terus bertambah tiap tahun.</p>
+          </div>
+        </div>
+        <p class="chart-source">Sumber: SIPSN &mdash; Kementerian Lingkungan Hidup dan Kehutanan RI (data 2024); Bank Dunia, Atlas of Sustainable Development Goals 2023. Angka bisa berubah tiap tahun laporan diperbarui.</p>
+      </div>
+
+      <div class="side">
+        <div class="side-frame decay-card">
+          <p class="section-kicker">Insight tambahan</p>
+          <h3 style="font-size:21px;">Berapa lama sampah butuh waktu buat terurai?</h3>
+          <p style="font-size:13.5px; color:var(--ink-soft); margin-top:10px; line-height:1.6;">Perkiraan umum yang sering dipakai dalam edukasi lingkungan &mdash; angka pastinya bisa berbeda tergantung kondisi lingkungan tempat sampah itu berada.</p>
+          <ul class="decay-list">
+            <li><span class="decay-item">Sisa buah &amp; sayur</span><span class="decay-time">Beberapa minggu</span></li>
+            <li><span class="decay-item">Kertas</span><span class="decay-time">2&ndash;6 minggu</span></li>
+            <li><span class="decay-item">Kantong plastik</span><span class="decay-time">&plusmn;10&ndash;20 tahun</span></li>
+            <li><span class="decay-item">Botol plastik</span><span class="decay-time">&plusmn;ratusan tahun</span></li>
+            <li><span class="decay-item">Styrofoam</span><span class="decay-time">Nyaris tidak terurai</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PRINSIP ==================== -->
+<section class="page" id="prinsip" data-page="prinsip">
+  <div class="wrap">
+    <p class="kicker gold">Empat cara mikir</p>
+    <h2 style="font-size:36px; max-width:640px;">Prinsip sederhana buat mulai</h2>
+    <p class="lede" style="margin-top:14px;">Nggak perlu rumus rumit &mdash; empat prinsip ini cukup buat mulai mikir ulang kebiasaan sehari-hari.</p>
+
+    <div class="principles-grid">
+      <article class="principle">
+        <div class="p-icon"><svg viewBox="0 0 48 48"><path d="M24 6 L24 30 M14 20 L24 30 L34 20" class="p-stroke"/><path d="M10 40 H38" class="p-stroke"/></svg></div>
+        <div class="p-text"><h3>Kurangi dulu, baru pikirin sisanya</h3><p>Barang yang nggak pernah dibeli, nggak akan pernah jadi sampah. Ini langkah paling murah dan paling sering dilewatin.</p></div>
+      </article>
+      <article class="principle">
+        <div class="p-icon"><svg viewBox="0 0 48 48"><path d="M12 24 A12 12 0 1 1 15 32" class="p-stroke"/><path d="M8 26 L12 34 L20 30" class="p-stroke"/></svg></div>
+        <div class="p-text"><h3>Pakai lagi sebelum buang</h3><p>Sebelum masuk tempat sampah, tanya dulu: masih bisa dipakai buat apa? Toples bekas, kain perca, kardus &mdash; semua ada babak keduanya.</p></div>
+      </article>
+      <article class="principle">
+        <div class="p-icon"><svg viewBox="0 0 48 48"><rect x="10" y="10" width="28" height="28" rx="6" class="p-stroke"/><path d="M18 24 H30 M24 18 V30" class="p-stroke"/></svg></div>
+        <div class="p-text"><h3>Pilah dari rumah</h3><p>Sampah yang udah dipilah dari awal, jauh lebih gampang didaur ulang. Ini kerjaan lima menit yang efeknya panjang.</p></div>
+      </article>
+      <article class="principle">
+        <div class="p-icon"><svg viewBox="0 0 48 48"><path d="M24 8 C 30 16, 34 22, 24 40 C 14 22, 18 16, 24 8 Z" class="p-stroke"/></svg></div>
+        <div class="p-text"><h3>Pulihkan, jangan cuma diam</h3><p>Tanam satu pohon, bersihin satu sungai, edukasi satu teman. Regenerasi berarti ninggalin tempat lebih baik dari waktu kamu datang.</p></div>
+      </article>
+    </div>
+
+    <div class="myths">
+      <p class="section-kicker">Biar nggak salah kaprah</p>
+      <h2 style="font-size:28px;">Mitos vs fakta</h2>
+      <p class="section-lede">Beberapa anggapan yang sering beredar soal gaya hidup ramah lingkungan &mdash; dan kenyataannya yang agak lebih rumit dari itu.</p>
+
+      <div class="faq-list">
+        <details class="faq-item"><summary>Kertas selalu lebih ramah lingkungan daripada plastik</summary><p>Kenyataannya: produksi kertas butuh lebih banyak air dan pohon. Yang paling menentukan bukan bahannya, tapi seberapa sering barang itu dipakai ulang sebelum dibuang.</p></details>
+        <details class="faq-item"><summary>Plastik &ldquo;biodegradable&rdquo; otomatis cepat terurai</summary><p>Kenyataannya: kebanyakan plastik jenis ini baru terurai optimal di kondisi khusus (suhu dan oksigen tertentu) yang jarang ada di tempat pembuangan sampah biasa. Bisa tetap butuh waktu lama.</p></details>
+        <details class="faq-item"><summary>Kalau udah didaur ulang, masalah sampah selesai</summary><p>Kenyataannya: daur ulang cuma menunda, bukan menghapus, kebutuhan akan material baru &mdash; dan kapasitas fasilitas daur ulang kita masih terbatas. Mengurangi tetap lebih penting.</p></details>
+        <details class="faq-item"><summary>Vegetarian penuh satu-satunya cara mengurangi jejak karbon makanan</summary><p>Kenyataannya: mengurangi porsi daging sedikit demi sedikit, dan yang paling gampang &mdash; nggak menyisakan makanan &mdash; sama-sama berdampak besar tanpa harus ganti pola makan total.</p></details>
+        <details class="faq-item"><summary>Perubahan besar cuma bisa dilakukan pemerintah atau perusahaan</summary><p>Kenyataannya: kebijakan memang penting, tapi kebiasaan personal yang konsisten dan menular ke orang sekitar terbukti ikut mendorong perubahan dari bawah &mdash; termasuk lewat gerakan komunitas.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== KOMUNITAS ==================== -->
+<section class="page" id="komunitas" data-page="komunitas">
+  <div class="wrap">
+    <p class="kicker">Bukti bukan cuma teori</p>
+    <h2 style="font-size:36px; max-width:640px;">Gerakan anak muda Indonesia yang beneran jalan</h2>
+    <p class="lede" style="margin-top:14px;">Dua gerakan dengan cara yang beda &mdash; satu turun langsung ke lapangan, satu lagi lewat riset &mdash; tapi sama-sama nyata.</p>
+
+    <div class="feature-grid">
+      <article class="feature">
+        <div class="feature-media"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="f-ring"/><path d="M35 65 Q 60 40 85 65" class="f-stroke"/><path d="M35 75 Q 60 55 85 75" class="f-stroke"/></svg></div>
+        <span class="feature-tag">Sorotan komunitas</span>
+        <h3>Pandawara Group</h3>
+        <p>Lima teman SMA asal Bandung yang capek daerahnya kebanjiran gara-gara sungai penuh sampah. Sejak pertengahan 2022, mereka bersih-bersih sungai dan pantai &mdash; videonya viral, namanya diambil dari Pandawa Lima di kisah Mahabharata.</p>
+        <p>Kini gerakannya berkembang jadi lima program utama: edukasi pantai tercemar, fasilitas kebersihan bareng warga lokal, dukungan pendidikan di sekolah, literasi lingkungan, sampai kolaborasi lintas negara dengan komunitas serupa di Vietnam dan Malaysia.</p>
+        <p class="feature-cta">Coba ikutan tantangan <strong>#OneDayOneTrashBag</strong> &mdash; satu hari, satu kantong sampah dari lingkungan sekitarmu.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-media"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="f-ring"/><path d="M60 30 C 40 50, 40 70, 60 90 C 80 70, 80 50, 60 30 Z" class="f-stroke"/></svg></div>
+        <span class="feature-tag">Sorotan komunitas</span>
+        <h3>Ecoton</h3>
+        <p>Yayasan lingkungan asal Gresik, Jawa Timur, yang sudah berdiri sejak tahun 2000. Digagas oleh Prigi Arisandi, fokus mereka bukan cuma bersih-bersih, tapi riset serius: kualitas air, mikroplastik, dan kondisi sungai-sungai di Indonesia.</p>
+        <p>Lewat program Ekspedisi Sungai Nusantara, tim Ecoton sudah meneliti puluhan sungai di berbagai pulau, dan menemukan bahwa sebagian besar sungai di Pulau Jawa dalam kondisi tercemar berat.</p>
+        <p class="feature-cta">Langkah kecilmu: kenali dulu nama sungai yang paling dekat dari rumahmu &mdash; tahu itu, langkah pertama buat peduli.</p>
+      </article>
+    </div>
+
+    <div class="tip-box">
+      <div>
+        <h3>Mau mulai gerakan sendiri?</h3>
+        <p>Nggak harus langsung besar. Kedua komunitas di atas pun mulai dari lingkup kecil &mdash; satu sungai, satu kampung. Ajak beberapa teman, pilih satu titik kumuh di sekitar rumah, dan mulai dari situ.</p>
+      </div>
+      <svg width="70" height="70" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="33" fill="none" stroke="#E7A94E" stroke-width="1.5" opacity="0.5"/><path d="M20 40 Q 35 20 50 40" stroke="#E7A94E" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="35" cy="40" r="4" fill="#E7A94E"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BANK SAMPAH (NEW) ==================== -->
+<section class="page" id="banksampah" data-page="banksampah">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <p class="kicker gold">Sampah jadi tabungan</p>
+        <h2 style="font-size:36px;">Kenalan sama Bank Sampah</h2>
+        <p class="lede" style="margin-top:14px;">Bank sampah itu tempat warga &ldquo;menabung&rdquo; sampah yang udah dipilah &mdash; ditimbang, dicatat di buku tabungan, terus ditukar jadi uang. Sistemnya persis bank biasa, cuma yang disetor bukan uang, tapi sampah non-organik.</p>
+      </div>
+      <div class="side" aria-hidden="true">
+        <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="70" width="260" height="120" rx="14" fill="#3D6140"/>
+          <rect x="20" y="70" width="260" height="30" rx="14" fill="#2F4F30"/>
+          <circle cx="150" cy="85" r="6" fill="#E7A94E"/>
+          <rect x="45" y="115" width="60" height="60" rx="8" fill="#F3EEDD"/>
+          <path d="M60 145 L75 160 L100 125" stroke="#2C7C86" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="120" y="115" width="60" height="60" rx="8" fill="#F3EEDD"/>
+          <text x="150" y="152" font-family="DM Serif Display, serif" font-size="26" fill="#C9812E" text-anchor="middle">Rp</text>
+          <rect x="195" y="115" width="60" height="60" rx="8" fill="#F3EEDD"/>
+          <path d="M212 160 L212 130 L240 130 L240 145 L225 145" stroke="#2F4F30" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M0 190 Q 40 178 80 190 T 160 190 T 240 190 T 300 190" stroke="#2C7C86" stroke-width="3" fill="none" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="steps-row">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Pilah</h3>
+        <p>Pisahkan sampah non-organik di rumah &mdash; plastik, kertas/kardus, logam, dan kaca masing-masing wadah sendiri.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Timbang</h3>
+        <p>Bawa ke bank sampah terdekat. Petugas menimbang tiap kategori sampah satu per satu.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Catat</h3>
+        <p>Berat dan nilainya dicatat di &ldquo;buku tabungan sampah&rdquo; milikmu sebagai nasabah, sama kayak buku tabungan bank.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Tukar</h3>
+        <p>Saldo bisa dicairkan jadi uang tunai secara berkala, atau di sejumlah bank sampah ditukar sembako.</p>
+      </div>
+    </div>
+
+    <div class="stat-line">
+      <div class="item"><div class="num">11.556</div><div class="lbl">Unit bank sampah aktif di Indonesia</div></div>
+      <div class="item"><div class="num">419.204</div><div class="lbl">Nasabah terdaftar secara nasional</div></div>
+      <div class="item"><div class="num">363</div><div class="lbl">Kabupaten/kota yang sudah punya bank sampah</div></div>
+      <p class="note">Data KLHK per 2021. Programnya diatur lewat Peraturan Menteri LH &mdash; dan meski jumlah unitnya terus tumbuh, kontribusinya ke total pengurangan sampah nasional masih kecil (sekitar 2&ndash;3%). Jadi bank sampah ini bukan solusi tunggal &mdash; tapi titik masuk paling gampang buat mulai mikirin sampah sebagai sesuatu yang bernilai, bukan cuma dibuang.</p>
+    </div>
+
+    <!-- interactive calculator -->
+    <div class="calc">
+      <div class="calc-head">
+        <p class="kicker">Coba sendiri</p>
+        <h2>Kalau sampahmu ditabung, jadi berapa?</h2>
+        <p class="lede">Pilih jenis sampah, geser beratnya, lalu tambahkan ke tabungan hijau di samping. Bandingkan sendiri kategori mana yang paling &ldquo;berharga&rdquo;.</p>
+        <p class="disclaimer">Catatan: harga per kg di bawah ini <strong>ilustrasi</strong> untuk simulasi, bukan harga resmi &mdash; harga asli beda-beda tiap bank sampah dan pengepul, tergantung wilayah dan kondisi pasar daur ulang.</p>
+
+        <div class="chip-row" id="chipRow">
+          <button class="chip active" data-price="2500" data-color="#2C7C86">
+            <span class="dot" style="background:#2C7C86"></span> Plastik PET (botol) &middot; &plusmn;Rp2.500/kg
+          </button>
+          <button class="chip" data-price="1200" data-color="#C9812E">
+            <span class="dot" style="background:#C9812E"></span> Kertas/kardus &middot; &plusmn;Rp1.200/kg
+          </button>
+          <button class="chip" data-price="7000" data-color="#3D6140">
+            <span class="dot" style="background:#3D6140"></span> Kaleng aluminium &middot; &plusmn;Rp7.000/kg
+          </button>
+          <button class="chip" data-price="300" data-color="#8A6E45">
+            <span class="dot" style="background:#8A6E45"></span> Botol kaca &middot; &plusmn;Rp300/kg
+          </button>
+          <button class="chip" data-price="1000" data-color="#5C7A5E">
+            <span class="dot" style="background:#5C7A5E"></span> Plastik campur &middot; &plusmn;Rp1.000/kg
+          </button>
+        </div>
+
+        <div class="weight-row">
+          <input type="range" id="weightSlider" min="0.5" max="20" step="0.5" value="2">
+          <div class="weight-val" id="weightVal">2 kg</div>
+        </div>
+
+        <div class="calc-actions">
+          <button class="btn btn-forest" id="addBtn">+ Tambah ke tabungan</button>
+          <button class="btn btn-outline" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="tabungan-card">
+        <span class="saldo-label">Saldo tabungan hijau</span>
+        <div class="saldo-num" id="saldoNum">Rp0</div>
+        <div class="saldo-sub" id="saldoSub">Belum ada setoran &mdash; mulai dari satu jenis sampah dulu.</div>
+
+        <div class="entry-list" id="entryList">
+          <div class="entry-empty">Setoranmu bakal muncul di sini.</div>
+        </div>
+
+        <div class="fun-fact" id="funFact">Tip: kaleng aluminium biasanya punya nilai per kg paling tinggi di antara sampah rumah tangga &mdash; sisihkan kalengmu sebelum dibuang.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== AKSI ==================== -->
+<section class="page" id="aksi" data-page="aksi">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <p class="kicker">Langkah kecil, tiap hari</p>
+        <h2 style="font-size:36px;">Coba centang satu per satu</h2>
+        <p class="lede" style="margin-top:14px;">Nggak perlu langsung semua. Pelan-pelan aja, yang penting jalan terus.</p>
+      </div>
+      <div class="side" aria-hidden="true">
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 170 Q 90 190 160 165 T 300 150" stroke="#2C7C86" stroke-width="2" fill="none" stroke-dasharray="4 8" opacity="0.5"/>
+          <circle cx="40" cy="165" r="16" fill="#3D6140"/>
+          <path d="M33 165 L38 171 L48 158" stroke="#F3EEDD" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="120" cy="180" r="16" fill="#C9812E"/>
+          <path d="M113 180 L118 186 L128 173" stroke="#F3EEDD" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="200" cy="160" r="16" fill="var(--line)" stroke="#2F4F30" stroke-width="1.5"/>
+          <circle cx="280" cy="150" r="16" fill="var(--line)" stroke="#2F4F30" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+
+    <ul class="checklist">
+      <li><label><input type="checkbox"><span>Bawa botol minum sendiri hari ini</span></label></li>
+      <li><label><input type="checkbox"><span>Pilah sampah organik dan non-organik di rumah</span></label></li>
+      <li><label><input type="checkbox"><span>Masak satu menu tanpa daging minggu ini</span></label></li>
+      <li><label><input type="checkbox"><span>Perbaiki satu barang, bukan beli baru</span></label></li>
+      <li><label><input type="checkbox"><span>Ajak satu teman ikutan #OneDayOneTrashBag</span></label></li>
+    </ul>
+    <p id="checklist-counter" class="checklist-counter">0 dari 5 kebiasaan udah kamu centang hari ini</p>
+
+    <div class="reflection">
+      <h2>Catatan kecil</h2>
+      <p>Checklist ini bukan buat dinilai sempurna atau nggak. Anggap aja kayak jurnal harian &mdash; yang penting jumlah centangmu minggu ini lebih banyak dari minggu lalu.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>Sumber bacaan: KLHK RI (SIPSN &amp; Simba) &middot; Bank Dunia &mdash; Atlas of Sustainable Development Goals &middot; United Nations SDGs &middot; Pandawara Group (pandawara.group) &middot; Ecoton (ecoton.or.id) &middot; Kompas.id &amp; Environment Indonesia &mdash; data program bank sampah</p>
+    <p class="footer-note">Bukan panduan sempurna &mdash; cuma ajakan buat mulai dari yang kecil.</p>
+  </div>
+</footer>
+
+<script>
+  // ---- Aksi checklist counter ----
+  var checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+  var counterEl = document.getElementById('checklist-counter');
+  function updateCounter(){
+    var checkedCount = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
+    counterEl.textContent = checkedCount + ' dari ' + checkboxes.length + ' kebiasaan udah kamu centang hari ini';
+  }
+  checkboxes.forEach(function(cb){ cb.addEventListener('change', updateCounter); });
+  updateCounter();
+
+  // ---- Page switching (one section visible at a time) ----
+  var pages = document.querySelectorAll('.page');
+  var navLinks = document.querySelectorAll('.nav-links a');
+
+  function goToPage(name){
+    pages.forEach(function(p){ p.classList.toggle('active', p.dataset.page === name); });
+    navLinks.forEach(function(l){ l.classList.toggle('active', l.getAttribute('href') === '#' + name); });
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+    history.replaceState(null, '', '#' + name);
+  }
+
+  document.addEventListener('click', function(e){
+    var link = e.target.closest('a[href^="#"]');
+    if(!link) return;
+    var name = link.getAttribute('href').slice(1);
+    var target = document.querySelector('.page[data-page="' + name + '"]');
+    if(target){
+      e.preventDefault();
+      goToPage(name);
+    }
+  });
+
+  // Open the right page on load (supports sharing a link like #banksampah)
+  var initial = (window.location.hash || '#beranda').slice(1);
+  if(document.querySelector('.page[data-page="' + initial + '"]')){
+    goToPage(initial);
+  } else {
+    goToPage('beranda');
+  }
+
+  // ---- Bank Sampah calculator ----
+  var chips = document.querySelectorAll('#chipRow .chip');
+  var selected = { price: 2500, label: 'Plastik PET (botol)', color: '#2C7C86' };
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      selected.price = parseFloat(chip.dataset.price);
+      selected.color = chip.dataset.color;
+      selected.label = chip.textContent.split('·')[0].trim();
+    });
+  });
+
+  var slider = document.getElementById('weightSlider');
+  var weightVal = document.getElementById('weightVal');
+  slider.addEventListener('input', function(){
+    weightVal.textContent = slider.value + ' kg';
+  });
+
+  var entries = [];
+  var entryList = document.getElementById('entryList');
+  var saldoNum = document.getElementById('saldoNum');
+  var saldoSub = document.getElementById('saldoSub');
+  var funFact = document.getElementById('funFact');
+
+  var facts = [
+    'Tip: kaleng aluminium biasanya punya nilai per kg paling tinggi di antara sampah rumah tangga &mdash; sisihkan kalengmu sebelum dibuang.',
+    'Tip: botol kaca nilainya kecil per kg, tapi beratnya bikin volumenya cepat terkumpul &mdash; tetap layak dipilah.',
+    'Tip: kardus bekas paket belanja online sering jadi kontributor terbesar tabungan bulanan di banyak bank sampah.',
+    'Tip: makin rutin nabung tiap minggu, makin gampang bank sampah mencatat dan menimbang setoranmu.'
+  ];
+
+  function formatRupiah(n){
+    return 'Rp' + Math.round(n).toLocaleString('id-ID');
+  }
+
+  function render(){
+    if(entries.length === 0){
+      entryList.innerHTML = '<div class="entry-empty">Setoranmu bakal muncul di sini.</div>';
+      saldoNum.textContent = 'Rp0';
+      saldoSub.textContent = 'Belum ada setoran — mulai dari satu jenis sampah dulu.';
+      return;
+    }
+    var total = 0;
+    entryList.innerHTML = entries.map(function(e){
+      total += e.amount;
+      return '<div class="entry-row"><div><div class="name">' + e.label + '</div><div class="meta">' + e.weight + ' kg</div></div><div class="amt">' + formatRupiah(e.amount) + '</div></div>';
+    }).join('');
+    saldoNum.textContent = formatRupiah(total);
+    saldoSub.textContent = entries.length + ' jenis setoran tercatat di buku tabunganmu.';
+  }
+
+  document.getElementById('addBtn').addEventListener('click', function(){
+    var weight = parseFloat(slider.value);
+    var amount = weight * selected.price;
+    entries.push({ label: selected.label, weight: weight, amount: amount });
+    funFact.innerHTML = facts[Math.floor(Math.random() * facts.length)];
+    render();
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    entries = [];
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>
